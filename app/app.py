@@ -1,11 +1,16 @@
 import os
 from flask import Flask, request, render_template, Response
 from flask_cors import CORS, cross_origin
+from werkzeug.exceptions import HTTPException, NotFound
+import google.auth
 
 execution_path = os.getcwd()
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__)
 CORS(app)
+
+logging.getLogger().setLevel(logging.INFO)
+service_account_path = 'app/credentials/client-secret.json'
 
 @app.route("/", methods= ['GET','POST'])
 @cross_origin()
