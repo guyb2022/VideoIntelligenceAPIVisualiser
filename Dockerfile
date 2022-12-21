@@ -1,6 +1,9 @@
 # set base image (host OS)
 FROM python
 # set the working directory in the container
+ENV PORT 8080
+ENV HOST 0.0.0.0
+
 WORKDIR /code
 # copy the dependencies file to the working directory
 COPY requirements.txt .
@@ -9,4 +12,4 @@ RUN pip install -r requirements.txt
 # copy the content of the local src directory to the working directory
 COPY . .
 # command to run on container start
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD [ "app/app.py" ]
